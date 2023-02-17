@@ -1,24 +1,26 @@
 <?php
-require __DIR__ . '/vendor/autoload.php';
 
-use Twilio\Rest\Client;
+// Replace with your own phone number
+$phone_number = "+919378011408";
 
-$account_sid = 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-$auth_token = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-$twilio_number = 'whatsapp:+14155238886';
-$my_number = 'whatsapp:+1234567890';
+// Get the order details from the form
+$product_image = $_POST["product-image"];
+$name = $_POST["name"];
+$ml_id = $_POST["ml-id"];
+$server_id = $_POST["server-id"];
+$quantity = $_POST["quantity"];
 
-$client = new Client($account_sid, $auth_token);
+// Construct the message
+$message = "Order Details:\n";
+$message .= "Product Image: " . $product_image . "\n";
+$message .= "Name: " . $name . "\n";
+$message .= "Mobile Legends ID: " . $ml_id . "\n";
+$message .= "Mobile Legends Server ID: " . $server_id . "\n";
+$message .= "Quantity: " . $quantity;
 
-$product = $_POST['product'];
-$name = $_POST['name'];
-$quantity = $_POST['quantity'];
-$user_id = $_POST['user-id'];
-$server_id = $_POST['server-id'];
-$order_id = uniqid();
+// Send the message using WhatsApp
+$url = "https://api.whatsapp.com/send?phone=" . $phone_number . "&text=" . urlencode($message);
+header("Location: " . $url);
+exit();
 
-$message = "New order received!\nOrder ID: $order_id\nProduct: $product\nName: $name\nQuantity: $quantity\nUser ID: $user_id\nServer ID: $server_id";
-
-$message = $client->messages->create($my_number, array('from' => $twilio_number, 'body' => $message));
 ?>
-
