@@ -2,29 +2,30 @@
 <html>
 <head>
 	<title>Order Form</title>
+	<script src="https://unpkg.com/@widgetbot/coral@0.0.8"></script>
 	<script src="order.js"></script>
 </head>
 <body>
 	<h1>Order Form</h1>
-	<form method="post" action="order.php">
+	<form>
 		<label for="product-image">Product Image:</label>
 		<input type="radio" name="product-image" value="image1"> Image 1
 		<input type="radio" name="product-image" value="image2"> Image 2
 		<input type="radio" name="product-image" value="image3"> Image 3
 		<br><br>
 		<label for="name">Name:</label>
-		<input type="text" name="name" required>
+		<input type="text" id="name" required>
 		<br><br>
 		<label for="ml-id">Mobile Legends ID:</label>
-		<input type="number" maxlength="8" pattern="[0-9]*" inputmode="numeric" oninput="this.value = Math.abs(this.value)" name="ml-id" required>
+		<input type="number" id="ml-id" required>
 		<br><br>
 		<label for="server-id">Mobile Legends Server ID:</label>
-		<input type="number" maxlength="5" pattern="[0-9]*" inputmode="numeric" oninput="this.value = Math.abs(this.value)" name="server-id" required>
+		<input type="number" id="server-id" required>
 		<br><br>
 		<label for="quantity">Quantity:</label>
-		<input type="number" name="quantity" min="1" max="10" required>
+		<input type="number" id="quantity" min="1" max="10" required>
 		<br><br>
-		<input type="submit" value="Place Order">
+		<button type="button" id="submit-order">Place Order</button>
 	</form>
 </body>
 </html>
