@@ -1,47 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Order Form</title>
+  <title>Order Form</title>
+  <script>
+    document.getElementById("order-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+      alert("Thank you for your order! We will process it soon.");
+      this.submit();
+    });
+  </script>
 </head>
 <body>
-	<h1>Order Form</h1>
-	<form id="order-form">
-		<label for="name">Name:</label>
-		<input type="text" id="name" name="name" required>
-
-		<label for="email">Email:</label>
-		<input type="email" id="email" name="email" required>
-
-		<label for="address">Address:</label>
-		<input type="text" id="address" name="address" required>
-
-		<label for="product">Product:</label>
-		<select id="product" name="product" required>
-			<option value="">--Select a product--</option>
-			<option value="Product 1">Product 1</option>
-			<option value="Product 2">Product 2</option>
-			<option value="Product 3">Product 3</option>
-		</select>
-
-		<label for="order">Order:</label>
-		<textarea id="order" name="order" rows="4" required></textarea>
-
-		<button type="submit">Submit Order</button>
-	</form>
-
-	<script>
-	const form = document.getElementById('order-form');
-		form.addEventListener('submit', function(event) {
-			event.preventDefault();
-			const name = document.getElementById('name').value;
-			const email = document.getElementById('email').value;
-			const address = document.getElementById('address').value;
-			const product = document.getElementById('product').value;
-			const order = document.getElementById('order').value;
-			const message = `New order received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}\nProduct: ${product}\nOrder: ${order}`;
-			const encodedMessage = encodeURIComponent(message);
-			window.location.href = `https://api.whatsapp.com/send?phone=1234567890&text=${encodedMessage}`;
-		});
-	</script>
+  <h1>Order Form</h1>
+  <form id="order-form" action="order.php" method="post">
+    <fieldset>
+      <legend>Select Product</legend>
+      <label>
+        <input type="radio" name="product" value="Product 1" required>
+        <img src="product1.jpg" alt="Product 1" height="100">
+      </label>
+      <label>
+        <input type="radio" name="product" value="Product 2">
+        <img src="product2.jpg" alt="Product 2" height="100">
+      </label>
+      <label>
+        <input type="radio" name="product" value="Product 3">
+        <img src="product3.jpg" alt="Product 3" height="100">
+      </label>
+      <label>
+        <input type="radio" name="product" value="Product 4">
+        <img src="product4.jpg" alt="Product 4" height="100">
+      </label>
+      <label>
+        <input type="radio" name="product" value="Product 5">
+        <img src="product5.jpg" alt="Product 5" height="100">
+      </label>
+    </fieldset>
+    <fieldset>
+      <legend>Enter Your Information</legend>
+      <label>
+        Name:
+        <input type="text" name="name" required>
+      </label>
+      <label>
+        Product Quantity:
+        <input type="number" name="quantity" required>
+      </label>
+      <label>
+        Mobile Legends User ID:
+        <input type="text" name="user-id" required>
+      </label>
+      <label>
+        Mobile Legends Server ID:
+        <input type="text" name="server-id" required>
+      </label>
+    </fieldset>
+    <input type="submit" value="Submit Order">
+  </form>
 </body>
 </html>
