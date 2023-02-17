@@ -1,61 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Order Form</title>
-  <script>
-    document.getElementById("order-form").addEventListener("submit", function(event) {
-      event.preventDefault();
-      alert("Thank you for your order! We will process it soon.");
-      this.submit();
-    });
-  </script>
+	<title>Order Form</title>
+	<script src="order.js"></script>
 </head>
 <body>
-  <h1>Order Form</h1>
-  <form id="order-form" action="order.php" method="post">
-    <fieldset>
-      <legend>Select Product</legend>
-      <label>
-        <input type="radio" name="product" value="Product 1" required>
-        <img src="product1.jpg" alt="Product 1" height="100">
-      </label>
-      <label>
-        <input type="radio" name="product" value="Product 2">
-        <img src="product2.jpg" alt="Product 2" height="100">
-      </label>
-      <label>
-        <input type="radio" name="product" value="Product 3">
-        <img src="product3.jpg" alt="Product 3" height="100">
-      </label>
-      <label>
-        <input type="radio" name="product" value="Product 4">
-        <img src="product4.jpg" alt="Product 4" height="100">
-      </label>
-      <label>
-        <input type="radio" name="product" value="Product 5">
-        <img src="product5.jpg" alt="Product 5" height="100">
-      </label>
-    </fieldset>
-    <fieldset>
-      <legend>Enter Your Information</legend>
-      <label>
-        Name:
-        <input type="text" name="name" required>
-      </label>
-      <label>
-        Product Quantity:
-        <input type="number" name="quantity" required>
-      </label>
-      <label>
-        Mobile Legends User ID:
-        <input type="text" name="user-id" required>
-      </label>
-      <label>
-        Mobile Legends Server ID:
-        <input type="text" name="server-id" required>
-      </label>
-    </fieldset>
-    <input type="submit" value="Submit Order">
-  </form>
+	<h1>Order Form</h1>
+	<form method="post" action="order.php">
+		<label for="product-image">Product Image:</label>
+		<input type="radio" name="product-image" value="image1"> Image 1
+		<input type="radio" name="product-image" value="image2"> Image 2
+		<input type="radio" name="product-image" value="image3"> Image 3
+		<br><br>
+		<label for="name">Name:</label>
+		<input type="text" name="name" required>
+		<br><br>
+		<label for="ml-id">Mobile Legends ID:</label>
+		<input type="number" maxlength="8" pattern="[0-9]*" inputmode="numeric" oninput="this.value = Math.abs(this.value)" name="ml-id" required>
+		<br><br>
+		<label for="server-id">Mobile Legends Server ID:</label>
+		<input type="number" maxlength="5" pattern="[0-9]*" inputmode="numeric" oninput="this.value = Math.abs(this.value)" name="server-id" required>
+		<br><br>
+		<label for="quantity">Quantity:</label>
+		<input type="number" name="quantity" min="1" max="10" required>
+		<br><br>
+		<input type="submit" value="Place Order">
+	</form>
 </body>
 </html>
