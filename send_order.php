@@ -1,20 +1,24 @@
- <?php
-// Replace with your own WhatsApp number
-$whatsappNumber = 'whatsapp:+919378011408';
+<?php
+require __DIR__ . '/vendor/autoload.php';
 
-// Get the form data and format the message
-$name = $_POST['name'];
-$email = $_POST['email'];
-$address = $_POST['address'];
+use Twilio\Rest\Client;
+
+$account_sid = 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+$auth_token = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+$twilio_number = 'whatsapp:+14155238886';
+$my_number = 'whatsapp:+1234567890';
+
+$client = new Client($account_sid, $auth_token);
+
 $product = $_POST['product'];
-$order = $_POST['order'];
-$message = "New order received:\nName: $name\nEmail: $email\nAddress: $address\nProduct: $product\nOrder: $order";
+$name = $_POST['name'];
+$quantity = $_POST['quantity'];
+$user_id = $_POST['user-id'];
+$server_id = $_POST['server-id'];
+$order_id = uniqid();
 
-// Encode the message and prepare the URL
-$encodedMessage = urlencode($message);
-$url = "https://api.whatsapp.com/send?phone=$whatsappNumber&text=$encodedMessage";
+$message = "New order received!\nOrder ID: $order_id\nProduct: $product\nName: $name\nQuantity: $quantity\nUser ID: $user_id\nServer ID: $server_id";
 
-// Redirect the user to the WhatsApp web interface
-header("Location: $url");
-exit();
+$message = $client->messages->create($my_number, array('from' => $twilio_number, 'body' => $message));
 ?>
+
