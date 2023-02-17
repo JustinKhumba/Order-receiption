@@ -29,6 +29,19 @@
 		<button type="submit">Submit Order</button>
 	</form>
 
-	<script scr="send_order.js"></script>
+	<script>
+	const form = document.getElementById('order-form');
+		form.addEventListener('submit', function(event) {
+			event.preventDefault();
+			const name = document.getElementById('name').value;
+			const email = document.getElementById('email').value;
+			const address = document.getElementById('address').value;
+			const product = document.getElementById('product').value;
+			const order = document.getElementById('order').value;
+			const message = `New order received:\nName: ${name}\nEmail: ${email}\nAddress: ${address}\nProduct: ${product}\nOrder: ${order}`;
+			const encodedMessage = encodeURIComponent(message);
+			window.location.href = `https://api.whatsapp.com/send?phone=1234567890&text=${encodedMessage}`;
+		});
+	</script>
 </body>
 </html>
